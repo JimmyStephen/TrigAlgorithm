@@ -54,8 +54,19 @@ namespace TrigAlgorithm
         {
             while (true)
             {
-                Console.Write(outputMessage + "\n(start number with \"|\" for sqrt)");
+                Console.Write(outputMessage);
                 string inputString = Console.ReadLine();
+                if (inputString.ToLower().Contains("help"))
+                {
+                    Console.WriteLine("start number with \"|\" for sqrt");
+                    Console.WriteLine("enter \"pi\" for pi");
+                    //Console.WriteLine("use / for division");
+                    continue;
+                }
+                if (inputString.ToLower().Equals("pi"))
+                {
+                    return (float)Math.PI;
+                }
                 bool sqrt = inputString.StartsWith("|");
                 if (sqrt)
                 {
@@ -78,8 +89,19 @@ namespace TrigAlgorithm
         {
             while (true)
             {
-                Console.Write(outputMessage + "\n(start number with \"|\" for sqrt)");
+                Console.Write(outputMessage);
                 string inputString = Console.ReadLine();
+                if (inputString.ToLower().Contains("help"))
+                {
+                    Console.WriteLine("start number with \"|\" for sqrt");
+                    Console.WriteLine("enter \"pi\" for pi");
+                    //Console.WriteLine("use / for division");
+                    continue;
+                }
+                if (inputString.ToLower().Equals("pi"))
+                {
+                    return Math.PI;
+                }
                 bool sqrt = inputString.StartsWith("|");
                 if (sqrt)
                 {
@@ -100,10 +122,27 @@ namespace TrigAlgorithm
         }
         public static bool GetBoolInput(string message, string trueRes = "Y", string falseRes = "N")
         {
-            Console.WriteLine("WIP");
+            bool invalid = true;
+            string temp;
+            while (invalid)
+            {
+                Console.WriteLine(message);
+                temp = Console.ReadLine();
+                if (temp.ToLower().Equals(trueRes.ToLower()))
+                {
+                    return true;
+                }else if (temp.ToLower().Equals(falseRes.ToLower()))
+                {
+                    return false;
+                }
+            }
             return false;
         }
-
+        public static string GetStringInput(string message)
+        {
+            Console.WriteLine(message);
+            return Console.ReadLine();
+        }
 
         private static void OutputArray(string[] array)
         {

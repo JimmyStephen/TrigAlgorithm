@@ -48,7 +48,6 @@ namespace TrigAlgorithm
                 }
             }
         }
-
         public static void GeneralTrigMethods()
         {
             //find out what controller to call using the avalible controller
@@ -327,6 +326,49 @@ namespace TrigAlgorithm
             double triangleTwoA = IO.GetDoubleInput("Triangle Two A: ");
             double triangleTwoB = IO.GetDoubleInput("Triangle Two B: ");
             double triangleTwoC = IO.GetDoubleInput("Triangle Two C: ");
+
+            //get scale factor
+            double scaleFactor = -1;
+            if(triangleOneA > 0 && triangleTwoA > 0)
+            {
+                scaleFactor = triangleOneA / triangleTwoA;
+            }
+            else if (triangleOneB > 0 && triangleTwoB > 0)
+            {
+                scaleFactor = triangleOneB / triangleTwoB;
+            }
+            else if (triangleOneC > 0 && triangleTwoC > 0)
+            {
+                scaleFactor = triangleOneC / triangleTwoC;
+            }
+
+            if (triangleOneA > 0 && triangleOneB > 0 && triangleOneC < 0)
+                triangleOneC = PythagoreanTheorem(triangleTwoA, triangleOneB, triangleOneC);
+            if (triangleOneA > 0 && triangleOneB < 0 && triangleOneC > 0)
+                triangleOneB = PythagoreanTheorem(triangleTwoA, triangleOneB, triangleOneC);
+            if (triangleOneA < 0 && triangleOneB > 0 && triangleOneC > 0)
+                triangleOneA = PythagoreanTheorem(triangleTwoA, triangleOneB, triangleOneC);
+
+            if (triangleTwoA > 0 && triangleTwoB > 0 && triangleTwoC < 0)
+                triangleTwoC = PythagoreanTheorem(triangleTwoA, triangleTwoB, triangleTwoC);
+            if (triangleTwoA > 0 && triangleTwoB < 0 && triangleTwoC > 0)
+                triangleTwoB = PythagoreanTheorem(triangleTwoA, triangleTwoB, triangleTwoC);
+            if (triangleTwoA < 0 && triangleTwoB > 0 && triangleTwoC > 0)
+                triangleTwoA = PythagoreanTheorem(triangleTwoA, triangleTwoB, triangleTwoC);
+
+            //find the side lengths where available
+            if (triangleOneA <= 0)
+                triangleOneA = triangleTwoA * scaleFactor;
+            if (triangleOneB <= 0)
+                triangleOneB = triangleTwoB * scaleFactor;
+            if (triangleOneC <= 0)
+                triangleOneC = triangleTwoC * scaleFactor;
+            if (triangleTwoA <= 0)
+                triangleTwoA = triangleOneA * scaleFactor;
+            if (triangleTwoB <= 0)
+                triangleTwoB = triangleOneB * scaleFactor;
+            if (triangleTwoC <= 0)
+                triangleTwoC = triangleOneC * scaleFactor;
 
             return $"Triangle One: A: {triangleOneA} B: {triangleOneB} C: {triangleOneC}\nTriangle Two: A: {triangleTwoA} B: {triangleTwoB} C: {triangleTwoC}";
         }
@@ -631,7 +673,7 @@ namespace TrigAlgorithm
             //find B
             else if(b > 0 & c > 0)
             {
-                return Math.Asin(b / c);
+                return Math.Acos(b / c);
             }
             //find C
             else if(b > 0 & a > 0)
